@@ -1,0 +1,16 @@
+node_modules/
+.next/
+.expo/
+dist/
+build/
+bin/
+obj/
+venv/
+__pycache__/
+*.pyc
+models/*.pt
+models/*.joblib
+.env
+.env.local
+*.log
+EOF

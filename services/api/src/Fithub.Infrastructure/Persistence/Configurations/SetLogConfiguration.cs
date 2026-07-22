@@ -1,0 +1,36 @@
+using Fithub.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace Fithub.Infrastructure.Persistence.Configurations;
+
+public class SetLogConfiguration : IEntityTypeConfiguration<SetLog>
+{
+    public void Configure(EntityTypeBuilder<SetLog> builder)
+    {
+        builder.ToTable("set_logs");
+
+        builder.HasKey(sl => sl.Id);
+        builder.Property(sl => sl.Id).HasColumnName("id");
+        builder.Property(sl => sl.WorkoutLogId).HasColumnName("workout_log_id");
+        builder.Property(sl => sl.ExerciseId).HasColumnName("exercise_id");
+        builder.Property(sl => sl.SetNumber).HasColumnName("set_number");
+        builder.Property(sl => sl.Reps).HasColumnName("reps");
+
+        // weight_kg: e.g. up to 9999.99. rpe: RPE scale is 0-10 in 0.5 steps, e.g. 9.5.
+        builder.Property(sl => sl.WeightKg).HasColumnName("weight_kg").HasPrecision(6, 2);
+        builder.Property(sl => sl.Rpe).HasColumnName("rpe").HasPrecision(3, 1);
+
+        builder.Property(sl => sl.CompletedAt).HasColumnName("completed_at");
+
+        builder.HasOne(sl => sl.WorkoutLog)
+            .WithMany(wl => wl.SetLogs)
+            .HasForeignKey(sl => sl.WorkoutLogId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        builder.HasOne(sl => sl.Exercise)
+            .WithMany(e => e.SetLogs)
+            .HasForeignKey(sl => sl.ExerciseId)
+            .OnDelete(DeleteBehavior.Restrict);
+    }
+}

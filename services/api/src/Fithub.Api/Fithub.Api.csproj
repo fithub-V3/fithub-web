@@ -9,6 +9,15 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.9" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.17" />
+    <!-- Pinned to match Microsoft.EntityFrameworkCore.Design in Fithub.Infrastructure: without this,
+         Npgsql.EntityFrameworkCore.PostgreSQL's own floor (9.0.1) wins Api's restore graph instead,
+         since Design's PrivateAssets="all" keeps its higher pin from flowing here transitively. -->
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="9.0.9" />
+    <!-- Required by the `dotnet ef` CLI on the startup project, not just the project holding the DbContext. -->
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.9">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
