@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fithub.Api", "Fithub.Api\Fithub.Api.csproj", "{EDA233B3-5DA7-4C2C-ACE3-121F710B392D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fithub.Application", "Fithub.Application\Fithub.Application.csproj", "{02D6FDFE-C7FA-47E8-BBB0-975EDC7C9B6D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fithub.Domain", "Fithub.Domain\Fithub.Domain.csproj", "{FE3C0F3E-A4EA-46FA-8BC9-03370F6E8D37}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fithub.Infrastructure", "Fithub.Infrastructure\Fithub.Infrastructure.csproj", "{B49D743A-5991-4C46-B4CD-BAC1515D6C06}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EDA233B3-5DA7-4C2C-ACE3-121F710B392D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDA233B3-5DA7-4C2C-ACE3-121F710B392D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDA233B3-5DA7-4C2C-ACE3-121F710B392D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDA233B3-5DA7-4C2C-ACE3-121F710B392D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02D6FDFE-C7FA-47E8-BBB0-975EDC7C9B6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02D6FDFE-C7FA-47E8-BBB0-975EDC7C9B6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02D6FDFE-C7FA-47E8-BBB0-975EDC7C9B6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02D6FDFE-C7FA-47E8-BBB0-975EDC7C9B6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE3C0F3E-A4EA-46FA-8BC9-03370F6E8D37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE3C0F3E-A4EA-46FA-8BC9-03370F6E8D37}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE3C0F3E-A4EA-46FA-8BC9-03370F6E8D37}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE3C0F3E-A4EA-46FA-8BC9-03370F6E8D37}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B49D743A-5991-4C46-B4CD-BAC1515D6C06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B49D743A-5991-4C46-B4CD-BAC1515D6C06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B49D743A-5991-4C46-B4CD-BAC1515D6C06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B49D743A-5991-4C46-B4CD-BAC1515D6C06}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

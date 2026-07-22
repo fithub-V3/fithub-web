@@ -1,0 +1,5 @@
+{
+  "name": "fithub",
+  "private": true,
+  "workspaces": ["apps/*", "packages/*"]
+}
