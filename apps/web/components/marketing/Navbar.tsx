@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
@@ -22,11 +23,11 @@ export default function Navbar() {
             </button>
 
             <div className={`navbar__links${isOpen ? " navbar__links--open" : ""}`}>
-                <div className="navbar__links__link">Features</div>
-                <div className="navbar__links__link">Train together</div>
-                <div className="navbar__links__link">Pricing</div>
-                <div className="navbar__links__link">Log in</div>
-                <div className="navbar__links__link green-button">Get started free</div>
+                <Link className="navbar__links__link" href="#">Features</Link>
+                <Link className="navbar__links__link" href="#">Train together</Link>
+                <Link className="navbar__links__link" href="#">Pricing</Link>
+                <Link className="navbar__links__link" href="/login">Log in</Link>
+                <Link className="navbar__links__link green-button" href="/register">Get started free</Link>
             </div>
         </nav>
     );
