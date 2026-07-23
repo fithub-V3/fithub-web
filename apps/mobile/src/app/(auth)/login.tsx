@@ -4,7 +4,7 @@ import { Link, useRouter } from "expo-router";
 import { login } from "@/lib/api-client";
 import * as SecureStore from "expo-secure-store";
 
-export default function RegisterScreen() {
+export default function LoginScreen() {
     const router = useRouter();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
