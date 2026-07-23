@@ -1,0 +1,31 @@
+.marketing-cards {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 16px;
+    padding: 0 40px 44px;
+}
+
+.marketing-card {
+    background: #0e1413;
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 15px;
+    padding: 20px;
+
+    &__title {
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 6px;
+    }
+
+    &__subtext {
+        color: #6a746f;
+        font-size: 12px;
+        line-height: 1.5;
+    }
+}
+
+@media (max-width: 700px) {
+    .marketing-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

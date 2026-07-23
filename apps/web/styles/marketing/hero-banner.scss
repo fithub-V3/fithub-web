@@ -1,0 +1,138 @@
+.hero-banner {
+    display: flex;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+    padding: 36px 40px 50px;
+
+    &__left {
+        &__neon-text {
+            display: inline-block;
+            background: rgba(52,209,126,.12);
+            color: #34d17e;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 6px 12px;
+            border-radius: 999px;
+            border: 1px solid rgba(52,209,126,.3);
+            font-family: 'Space Mono',monospace;
+            margin-bottom: 18px;
+        }
+
+        &__title {
+            margin: 0 0 16px;
+            font-size: 46px;
+            font-weight: 600;
+            letter-spacing: -.03em;
+            line-height: 1.06;
+        }
+
+        &__subtitle {
+            color: #98a39e;
+            font-size: 16px;
+            line-height: 1.6;
+            max-width: 440px;
+            margin: 0 0 26px;
+        }
+
+        &__buttons {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+
+            .green-button {
+                color: #07140d;
+                font-weight: 700;
+                font-size: 15px;
+                padding: 15px 24px;
+            }
+
+            &__button {
+                color: #f0f4f2;
+                font-weight: 600;
+                font-size: 15px;
+                padding: 15px 6px;
+            }
+        }
+    }
+
+    &__right {
+        width: 100%;
+
+        &__example {
+            background: #0e1413;
+            border: 1px solid rgba(255,255,255,.09);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 30px 70px -30px rgba(0,0,0,.7);
+
+            &__header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 14px;
+
+                &__title {
+                    font-family: 'Space Mono',monospace;
+                    font-size: 10px;
+                    color: #6a746f;
+                }
+
+                &__tag {
+                    color: #34d17e;
+                    font-size: 11px;
+                }
+            }
+
+            &__workout {
+                background: linear-gradient(135deg,#34d17e,#1f9d5c);
+                border-radius: 14px;
+                padding: 18px;
+                color: #07140d;
+                margin-bottom: 12px;
+
+                &__title {
+                    font-size: 20px;
+                    font-weight: 700;
+                    letter-spacing: -.02em;
+                }
+
+                &__subtext {
+                    font-size: 12px;
+                    font-weight: 600;
+                    opacity: .75;
+                    margin-top: 2px;
+                }
+            }
+
+            &__cards {
+                display: flex;
+                gap: 9px;
+
+                &__card {
+                    flex: 1;
+                    background: #131917;
+                    border: 1px solid rgba(255,255,255,.07);
+                    border-radius: 12px;
+                    padding: 12px;
+                    &__title {
+                        font-family: 'Space Mono',monospace;
+                        font-size: 9px;
+                        color: #6a746f;
+                    }
+
+                    &__text {
+                        font-size: 20px;
+                        font-weight: 700;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 700px) {
+    .hero-banner {
+        flex-direction: column;
+    }
+}

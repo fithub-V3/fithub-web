@@ -24,3 +24,15 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.green-button {
+  background: #34d17e;
+  color: #07140d;
+  font-weight: 600;
+  padding: 9px 16px;
+  border-radius: 10px;
+}
+
+.green-text {
+  color: #34d17e;
+}
