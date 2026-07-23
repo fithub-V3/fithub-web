@@ -1,5 +1,5 @@
 {
   "name": "fithub",
   "private": true,
-  "workspaces": ["apps/*", "packages/*"]
+  "workspaces": ["apps/web", "packages/*"]
 }
