@@ -1,0 +1,113 @@
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+}
+
+
+.brand {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+
+    &__text {
+        font-size: 17px;
+        font-weight: 600;
+        letter-spacing: -.02em;
+    }
+}
+
+.heading {
+    &__title {
+        margin: 0 0 6px;
+        font-size: 26px;
+        font-weight: 600;
+        letter-spacing: -.02em;
+    }
+
+    &__subtext {
+        color: #98a39e;
+        font-size: 13px;
+        margin: 0 0 18px;
+    }
+}
+
+.auth-element {
+    &__tag {
+        font-family: 'Space Mono',monospace;
+        font-size: 10px;
+        color: #6a746f;
+        margin-top: 20px;
+        margin-bottom: 7px;
+    }
+
+    &__input {
+        input {
+            background: #131917;
+            border: 1px solid rgba(255,255,255,.1);
+            border-radius: 11px;
+            padding: 13px;
+            font-size: 14px;
+            color: #98a39e;
+            width: 100%;
+        }
+    }
+
+    &__submit-button {
+        background: #34d17e;
+        color: #07140d;
+        font-weight: 700;
+        font-size: 15px;
+        text-align: center;
+        padding: 14px;
+        border-radius: 12px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+
+        button {
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    &__alt-button {
+        margin-top: 20px;
+        background: #131917;
+        border: 1px solid rgba(255,255,255,.1);
+        color: #f0f4f2;
+        font-weight: 600;
+        font-size: 14px;
+        text-align: center;
+        padding: 13px;
+        border-radius: 12px;        
+    }
+}
+
+.auth-wrapper {
+    width: 690px;
+}
+
+@media (max-width: 1000px) {
+    .auth-wrapper {
+        width: 75% !important;
+    }
+}
+
+.footer {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #98a39e;
+    font-size: 16px;
+    margin-top: 22px;
+
+    &__link {
+        color: #34d17e;
+    }
+}

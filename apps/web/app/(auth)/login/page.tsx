@@ -1,8 +1,9 @@
 "use client";
-
+import "@/styles/auth/auth.scss";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { login } from "@/lib/api-client";
+import Link from "next/link";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -33,29 +34,65 @@ export default function LoginPage() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h1>Log in</h1>
-
-      <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        required
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        required
-      />
-
-      {error && <p style={{ color: "red" }}>{error}</p>}
-
-      <button type="submit" disabled={isSubmitting}>
-        {isSubmitting ? "Logging in..." : "Log in"}
-      </button>
-    </form>
+    <div className="auth-wrapper">
+      <div className="text">
+        <div className="brand">
+          <div className="brand__image">PLACEHOLDER</div>
+          <div className="brand__text">Fithub</div>
+        </div>
+        <div className="heading">
+          <div className="heading__title">Welcome back</div>
+          <div className="heading__subtext">Log in to pick up where you left off.</div>
+        </div>
+      </div>
+      <div className="auth-form">
+        <div className="auth-element">
+          <div className="auth-element__tag">Email</div>
+          <div className="auth-element__input">
+            <input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+        </div>
+        <div className="auth-element">
+          <div className="auth-element__tag">Password</div>
+          <div className="auth-element__input">
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
+        </div>
+        <div className="auth-element__error">
+          {error && <p style={{ color: "red" }}>{error}</p>}        
+        </div>
+        <div className="auth-element__submit-button">
+          <button type="submit" disabled={isSubmitting} onClick={handleSubmit}>
+            {isSubmitting ? "Logging in..." : "Log in"}
+          </button>
+        </div>
+        <div className="flex items-center gap-4">
+          <div className="h-px flex-1 bg-gray-700"></div>
+          <span className="text-sm text-gray-500">or</span>
+          <div className="h-px flex-1 bg-gray-700"></div>
+        </div>
+        <div className="auth-element__alt-button">
+          <button type="submit" disabled={isSubmitting}>
+            Continue with Google
+          </button>
+        </div>
+      </div>
+      <div className="footer">
+        <div className="footer__text">New here?</div>
+        <Link className="footer__link" href="/register">Create an account</Link>
+      </div>
+    </div>
   );
 }
