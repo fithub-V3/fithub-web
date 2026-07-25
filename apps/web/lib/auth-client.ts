@@ -17,9 +17,9 @@ type AuthResponse = {
     refreshToken: string;
 };
 
-
 // Generic post method
 async function postJson<TResponse>(path: string, body: unknown): Promise<TResponse> {
+    console.log("test 2");
     const res = await fetch(`${API_BASE_URL}${path}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },

@@ -1,4 +1,5 @@
-using Fithub.Application.Auth;
+using Fithub.Infrastructure.Dtos;
+using Fithub.Infrastructure.Services.Auth;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.RateLimiting;
 

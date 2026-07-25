@@ -2,7 +2,7 @@
 import "@/styles/auth/auth.scss";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { login } from "@/lib/api-client";
+import { login } from "@/lib/auth-client";
 import Link from "next/link";
 
 export default function LoginPage() {

@@ -3,7 +3,7 @@
 import "@/styles/auth/auth.scss";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { register } from "@/lib/api-client";
+import { register } from "@/lib/auth-client";
 import Link from "next/link";
 
 

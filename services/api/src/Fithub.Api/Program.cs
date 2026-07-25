@@ -1,6 +1,6 @@
 using System.Text;
-using Fithub.Application.Auth;
 using Fithub.Infrastructure;
+using Fithub.Infrastructure.Services.Auth;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.IdentityModel.Tokens;

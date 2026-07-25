@@ -25,7 +25,7 @@ namespace Fithub.Infrastructure.Persistence.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Fithub.Domain.Entities.Exercise", b =>
+            modelBuilder.Entity("Fithub.Infrastructure.Entities.Exercise", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -58,7 +58,7 @@ namespace Fithub.Infrastructure.Persistence.Migrations
                     b.ToTable("exercises", (string)null);
                 });
 
-            modelBuilder.Entity("Fithub.Domain.Entities.RefreshToken", b =>
+            modelBuilder.Entity("Fithub.Infrastructure.Entities.RefreshToken", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -92,7 +92,7 @@ namespace Fithub.Infrastructure.Persistence.Migrations
                     b.ToTable("refresh_tokens", (string)null);
                 });
 
-            modelBuilder.Entity("Fithub.Domain.Entities.Schedule", b =>
+            modelBuilder.Entity("Fithub.Infrastructure.Entities.Schedule", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -120,7 +120,7 @@ namespace Fithub.Infrastructure.Persistence.Migrations
                     b.ToTable("schedules", (string)null);
                 });
 
-            modelBuilder.Entity("Fithub.Domain.Entities.SetLog", b =>
+            modelBuilder.Entity("Fithub.Infrastructure.Entities.SetLog", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -166,7 +166,7 @@ namespace Fithub.Infrastructure.Persistence.Migrations
                     b.ToTable("set_logs", (string)null);
                 });
 
-            modelBuilder.Entity("Fithub.Domain.Entities.User", b =>
+            modelBuilder.Entity("Fithub.Infrastructure.Entities.User", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -200,7 +200,7 @@ namespace Fithub.Infrastructure.Persistence.Migrations
                     b.ToTable("users", (string)null);
                 });
 
-            modelBuilder.Entity("Fithub.Domain.Entities.Workout", b =>
+            modelBuilder.Entity("Fithub.Infrastructure.Entities.Workout", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -231,7 +231,7 @@ namespace Fithub.Infrastructure.Persistence.Migrations
                     b.ToTable("workouts", (string)null);
                 });
 
-            modelBuilder.Entity("Fithub.Domain.Entities.WorkoutExercise", b =>
+            modelBuilder.Entity("Fithub.Infrastructure.Entities.WorkoutExercise", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -267,7 +267,7 @@ namespace Fithub.Infrastructure.Persistence.Migrations
                     b.ToTable("workout_exercises", (string)null);
                 });
 
-            modelBuilder.Entity("Fithub.Domain.Entities.WorkoutLog", b =>
+            modelBuilder.Entity("Fithub.Infrastructure.Entities.WorkoutLog", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -299,9 +299,9 @@ namespace Fithub.Infrastructure.Persistence.Migrations
                     b.ToTable("workout_logs", (string)null);
                 });
 
-            modelBuilder.Entity("Fithub.Domain.Entities.Exercise", b =>
+            modelBuilder.Entity("Fithub.Infrastructure.Entities.Exercise", b =>
                 {
-                    b.HasOne("Fithub.Domain.Entities.User", "CreatedBy")
+                    b.HasOne("Fithub.Infrastructure.Entities.User", "CreatedBy")
                         .WithMany("CreatedExercises")
                         .HasForeignKey("CreatedById")
                         .OnDelete(DeleteBehavior.SetNull);
@@ -309,9 +309,9 @@ namespace Fithub.Infrastructure.Persistence.Migrations
                     b.Navigation("CreatedBy");
                 });
 
-            modelBuilder.Entity("Fithub.Domain.Entities.RefreshToken", b =>
+            modelBuilder.Entity("Fithub.Infrastructure.Entities.RefreshToken", b =>
                 {
-                    b.HasOne("Fithub.Domain.Entities.User", "User")
+                    b.HasOne("Fithub.Infrastructure.Entities.User", "User")
                         .WithMany("RefreshTokens")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -320,15 +320,15 @@ namespace Fithub.Infrastructure.Persistence.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Fithub.Domain.Entities.Schedule", b =>
+            modelBuilder.Entity("Fithub.Infrastructure.Entities.Schedule", b =>
                 {
-                    b.HasOne("Fithub.Domain.Entities.User", "User")
+                    b.HasOne("Fithub.Infrastructure.Entities.User", "User")
                         .WithMany("Schedules")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Fithub.Domain.Entities.Workout", "Workout")
+                    b.HasOne("Fithub.Infrastructure.Entities.Workout", "Workout")
                         .WithMany("Schedules")
                         .HasForeignKey("WorkoutId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -339,15 +339,15 @@ namespace Fithub.Infrastructure.Persistence.Migrations
                     b.Navigation("Workout");
                 });
 
-            modelBuilder.Entity("Fithub.Domain.Entities.SetLog", b =>
+            modelBuilder.Entity("Fithub.Infrastructure.Entities.SetLog", b =>
                 {
-                    b.HasOne("Fithub.Domain.Entities.Exercise", "Exercise")
+                    b.HasOne("Fithub.Infrastructure.Entities.Exercise", "Exercise")
                         .WithMany("SetLogs")
                         .HasForeignKey("ExerciseId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Fithub.Domain.Entities.WorkoutLog", "WorkoutLog")
+                    b.HasOne("Fithub.Infrastructure.Entities.WorkoutLog", "WorkoutLog")
                         .WithMany("SetLogs")
                         .HasForeignKey("WorkoutLogId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -358,9 +358,9 @@ namespace Fithub.Infrastructure.Persistence.Migrations
                     b.Navigation("WorkoutLog");
                 });
 
-            modelBuilder.Entity("Fithub.Domain.Entities.Workout", b =>
+            modelBuilder.Entity("Fithub.Infrastructure.Entities.Workout", b =>
                 {
-                    b.HasOne("Fithub.Domain.Entities.User", "User")
+                    b.HasOne("Fithub.Infrastructure.Entities.User", "User")
                         .WithMany("Workouts")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -369,15 +369,15 @@ namespace Fithub.Infrastructure.Persistence.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Fithub.Domain.Entities.WorkoutExercise", b =>
+            modelBuilder.Entity("Fithub.Infrastructure.Entities.WorkoutExercise", b =>
                 {
-                    b.HasOne("Fithub.Domain.Entities.Exercise", "Exercise")
+                    b.HasOne("Fithub.Infrastructure.Entities.Exercise", "Exercise")
                         .WithMany("WorkoutExercises")
                         .HasForeignKey("ExerciseId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Fithub.Domain.Entities.Workout", "Workout")
+                    b.HasOne("Fithub.Infrastructure.Entities.Workout", "Workout")
                         .WithMany("WorkoutExercises")
                         .HasForeignKey("WorkoutId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -388,15 +388,15 @@ namespace Fithub.Infrastructure.Persistence.Migrations
                     b.Navigation("Workout");
                 });
 
-            modelBuilder.Entity("Fithub.Domain.Entities.WorkoutLog", b =>
+            modelBuilder.Entity("Fithub.Infrastructure.Entities.WorkoutLog", b =>
                 {
-                    b.HasOne("Fithub.Domain.Entities.User", "User")
+                    b.HasOne("Fithub.Infrastructure.Entities.User", "User")
                         .WithMany("WorkoutLogs")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Fithub.Domain.Entities.Workout", "Workout")
+                    b.HasOne("Fithub.Infrastructure.Entities.Workout", "Workout")
                         .WithMany("WorkoutLogs")
                         .HasForeignKey("WorkoutId")
                         .OnDelete(DeleteBehavior.SetNull);
@@ -406,14 +406,14 @@ namespace Fithub.Infrastructure.Persistence.Migrations
                     b.Navigation("Workout");
                 });
 
-            modelBuilder.Entity("Fithub.Domain.Entities.Exercise", b =>
+            modelBuilder.Entity("Fithub.Infrastructure.Entities.Exercise", b =>
                 {
                     b.Navigation("SetLogs");
 
                     b.Navigation("WorkoutExercises");
                 });
 
-            modelBuilder.Entity("Fithub.Domain.Entities.User", b =>
+            modelBuilder.Entity("Fithub.Infrastructure.Entities.User", b =>
                 {
                     b.Navigation("CreatedExercises");
 
@@ -426,7 +426,7 @@ namespace Fithub.Infrastructure.Persistence.Migrations
                     b.Navigation("Workouts");
                 });
 
-            modelBuilder.Entity("Fithub.Domain.Entities.Workout", b =>
+            modelBuilder.Entity("Fithub.Infrastructure.Entities.Workout", b =>
                 {
                     b.Navigation("Schedules");
 
@@ -435,7 +435,7 @@ namespace Fithub.Infrastructure.Persistence.Migrations
                     b.Navigation("WorkoutLogs");
                 });
 
-            modelBuilder.Entity("Fithub.Domain.Entities.WorkoutLog", b =>
+            modelBuilder.Entity("Fithub.Infrastructure.Entities.WorkoutLog", b =>
                 {
                     b.Navigation("SetLogs");
                 });

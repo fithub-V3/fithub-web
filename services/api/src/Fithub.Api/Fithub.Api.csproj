@@ -21,7 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Fithub.Application\Fithub.Application.csproj" />
     <ProjectReference Include="..\Fithub.Infrastructure\Fithub.Infrastructure.csproj" />
   </ItemGroup>
 

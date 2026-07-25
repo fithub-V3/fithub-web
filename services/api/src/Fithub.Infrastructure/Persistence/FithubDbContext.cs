@@ -1,4 +1,4 @@
-using Fithub.Domain.Entities;
+using Fithub.Infrastructure.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Fithub.Infrastructure.Persistence;

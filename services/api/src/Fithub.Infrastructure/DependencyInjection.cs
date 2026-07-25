@@ -1,6 +1,5 @@
-using Fithub.Domain.Repositories;
 using Fithub.Infrastructure.Persistence;
-using Fithub.Infrastructure.Persistence.Repositories;
+using Fithub.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
