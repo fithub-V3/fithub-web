@@ -17,10 +17,12 @@ public class ExerciseConfiguration : IEntityTypeConfiguration<Exercise>
         builder.Property(e => e.Equipment).HasColumnName("equipment").IsRequired();
         builder.Property(e => e.CreatedById).HasColumnName("created_by");
 
-        // Null created_by = system exercise; keep it on delete of the creating user.
+        // Every exercise belongs to a user (no system exercises in MVP).
+        // Deleting a user cascades to delete their exercises, consistent with
+        // full account-deletion / data-removal on account close.
         builder.HasOne(e => e.CreatedBy)
             .WithMany(u => u.CreatedExercises)
             .HasForeignKey(e => e.CreatedById)
-            .OnDelete(DeleteBehavior.SetNull);
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }

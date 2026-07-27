@@ -25,7 +25,7 @@ export default function LoginPage() {
       localStorage.setItem("accessToken", accessToken);
       localStorage.setItem("refreshToken", refreshToken);
 
-      router.push("/workouts");
+      router.push("/exercises");
     } catch {
       setError("Invalid email or password.");
     } finally {
