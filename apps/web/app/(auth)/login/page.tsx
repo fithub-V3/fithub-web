@@ -2,7 +2,7 @@
 import "@/styles/auth/auth.scss";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { login } from "@/lib/auth-client";
+import { login, setTokens } from "@/lib/auth-client";
 import Link from "next/link";
 
 export default function LoginPage() {
@@ -22,8 +22,7 @@ export default function LoginPage() {
 
       // TEMPORARY - fine for now, we'll swap this for something more secure
       // once we build proper auth-state handling.
-      localStorage.setItem("accessToken", accessToken);
-      localStorage.setItem("refreshToken", refreshToken);
+      setTokens(accessToken, refreshToken);
 
       router.push("/exercises");
     } catch {
