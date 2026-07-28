@@ -1,0 +1,287 @@
+$nav-transition-timing: .22s cubic-bezier(.4, 0, .2, 1);
+
+.dashboard-navbar {
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    background: #0a0f0c;
+    border-right: 1px solid rgba(255, 255, 255, .08);
+    transition: width $nav-transition-timing, padding $nav-transition-timing;
+
+    &--collapsed {
+        width: 74px;
+        align-items: center;
+        padding: 20px 0;
+    }
+
+    &--expanded {
+        width: 220px;
+        align-items: stretch;
+        padding: 20px 16px;
+    }
+
+    &__brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 24px;
+        color: #f0f4f2;
+    }
+
+    &__logo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        border: none;
+        background: #34d17e;
+        color: #07140d;
+        cursor: pointer;
+        transition: transform .15s ease;
+
+        &:hover {
+            transform: scale(1.05);
+        }
+
+        &:active {
+            transform: scale(.96);
+        }
+    }
+
+    &__brand-name {
+        font-weight: 600;
+        font-size: 16px;
+        white-space: nowrap;
+        overflow: hidden;
+        max-width: 100px;
+        opacity: 1;
+        transition: max-width $nav-transition-timing, opacity .15s ease;
+    }
+
+    &--collapsed &__brand-name {
+        max-width: 0;
+        opacity: 0;
+    }
+
+    &__collapse-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        width: 26px;
+        height: 26px;
+        margin-left: auto;
+        border: none;
+        border-radius: 8px;
+        background: transparent;
+        color: #6a746f;
+        cursor: pointer;
+        opacity: 1;
+        max-width: 26px;
+        overflow: hidden;
+        transition: max-width $nav-transition-timing, opacity .15s ease, margin $nav-transition-timing,
+            background .12s ease, color .12s ease;
+
+        svg {
+            transition: transform .18s ease;
+        }
+
+        &:hover {
+            background: rgba(255, 255, 255, .08);
+            color: #f0f4f2;
+
+            svg {
+                transform: translateX(-2px);
+            }
+        }
+    }
+
+    &--collapsed &__collapse-button {
+        max-width: 0;
+        opacity: 0;
+        margin-left: 0;
+        pointer-events: none;
+    }
+
+    &__section {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    &__soon {
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        max-height: 220px;
+        opacity: 1;
+        transition: max-height $nav-transition-timing, opacity .15s ease;
+    }
+
+    &--collapsed &__soon {
+        max-height: 0;
+        opacity: 0;
+    }
+
+    &__section-label {
+        color: #4d5650;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: .06em;
+        margin: 20px 0 12px;
+        white-space: nowrap;
+    }
+
+    &__link {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        color: #6a746f;
+        transition: background .12s ease, color .12s ease, width $nav-transition-timing,
+            padding $nav-transition-timing;
+
+        &:hover {
+            background: rgba(255, 255, 255, .06);
+            color: #f0f4f2;
+        }
+
+        &--active {
+            background: #34d17e;
+            color: #07140d;
+
+            &:hover {
+                background: #34d17e;
+                color: #07140d;
+            }
+        }
+
+        &--disabled {
+            color: #3a413d;
+            cursor: default;
+        }
+    }
+
+    &--expanded &__link {
+        width: 100%;
+        justify-content: flex-start;
+        padding: 0 10px;
+    }
+
+    &__icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 18px;
+        height: 18px;
+        flex-shrink: 0;
+    }
+
+    &--collapsed &__icon {
+        margin: 0 auto;
+    }
+
+    &__label {
+        display: inline-block;
+        font-size: 14px;
+        white-space: nowrap;
+        overflow: hidden;
+        max-width: 140px;
+        opacity: 1;
+        transition: max-width $nav-transition-timing, opacity .15s ease;
+    }
+
+    &--collapsed &__label {
+        max-width: 0;
+        opacity: 0;
+    }
+
+    &__footer {
+        margin-top: auto;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        transition: flex-direction $nav-transition-timing, padding $nav-transition-timing;
+    }
+
+    &--collapsed &__footer {
+        flex-direction: column;
+        padding-top: 16px;
+    }
+
+    &--expanded &__footer {
+        padding-top: 16px;
+        border-top: 1px solid rgba(255, 255, 255, .08);
+    }
+
+    &__avatar {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: #ccd4d0;
+        flex-shrink: 0;
+    }
+
+    &__user-info {
+        min-width: 0;
+        overflow: hidden;
+        max-width: 120px;
+        opacity: 1;
+        transition: max-width $nav-transition-timing, opacity .15s ease;
+    }
+
+    &--collapsed &__user-info {
+        max-width: 0;
+        opacity: 0;
+    }
+
+    &__user-name {
+        color: #f0f4f2;
+        font-size: 13px;
+        font-weight: 600;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    &__user-plan {
+        color: #6a746f;
+        font-size: 12px;
+        white-space: nowrap;
+    }
+
+    &__menu-button {
+        margin-left: auto;
+        flex-shrink: 0;
+        width: 26px;
+        height: 26px;
+        max-width: 26px;
+        overflow: hidden;
+        border: none;
+        background: transparent;
+        color: #6a746f;
+        opacity: 1;
+        cursor: pointer;
+        transition: max-width $nav-transition-timing, opacity .15s ease, margin $nav-transition-timing,
+            color .12s ease;
+
+        &:hover {
+            color: #f0f4f2;
+        }
+    }
+
+    &--collapsed &__menu-button {
+        max-width: 0;
+        opacity: 0;
+        margin-left: 0;
+        pointer-events: none;
+    }
+}
