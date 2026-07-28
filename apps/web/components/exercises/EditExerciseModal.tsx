@@ -1,20 +1,21 @@
 "use client";
 
 import { useState } from "react";
-import { createExercise, type Exercise } from "@/lib/exercises-client";
+import { updateExercise, type Exercise } from "@/lib/exercises-client";
 
 const MUSCLE_GROUP_OPTIONS = ["Chest", "Shoulders", "Back", "Legs", "Arms", "Core"];
 const EQUIPMENT_OPTIONS = ["Barbell", "Dumbbell", "Machine", "Bodyweight", "Cable", "Kettlebell"];
 
-type NewExerciseModalProps = {
+type EditExerciseModalProps = {
+  exercise: Exercise;
   onClose: () => void;
-  onCreated: (exercise: Exercise) => void;
+  onUpdated: (exercise: Exercise) => void;
 };
 
-export default function NewExerciseModal({ onClose, onCreated }: NewExerciseModalProps) {
-  const [name, setName] = useState("");
-  const [muscleGroup, setMuscleGroup] = useState(MUSCLE_GROUP_OPTIONS[0]);
-  const [equipment, setEquipment] = useState(EQUIPMENT_OPTIONS[0]);
+export default function EditExerciseModal({ exercise, onClose, onUpdated }: EditExerciseModalProps) {
+  const [name, setName] = useState(exercise.name);
+  const [muscleGroup, setMuscleGroup] = useState(exercise.muscleGroup);
+  const [equipment, setEquipment] = useState(exercise.equipment);
   const [isSaving, setIsSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -28,8 +29,8 @@ export default function NewExerciseModal({ onClose, onCreated }: NewExerciseModa
     setError(null);
 
     try {
-      const exercise = await createExercise({ name, muscleGroup, equipment });
-      onCreated(exercise);
+      const updated = await updateExercise(exercise.id, { name, muscleGroup, equipment });
+      onUpdated(updated);
       onClose();
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to save exercise.");
@@ -47,7 +48,7 @@ export default function NewExerciseModal({ onClose, onCreated }: NewExerciseModa
     >
       <div className="exercise-modal" role="dialog" aria-modal="true">
         <div className="exercise-modal__header">
-          <h2>New exercise</h2>
+          <h2>Edit exercise</h2>
           <button onClick={onClose} className="exercise-modal__close">
             ✕
           </button>
@@ -96,7 +97,7 @@ export default function NewExerciseModal({ onClose, onCreated }: NewExerciseModa
 
         <div className="exercise-modal__footer">
           <button onClick={handleSave} disabled={isSaving} className="exercise-modal__save">
-            {isSaving ? "Saving..." : "Save exercise"}
+            {isSaving ? "Saving..." : "Save changes"}
           </button>
           <button onClick={onClose} className="exercise-modal__cancel">
             Cancel

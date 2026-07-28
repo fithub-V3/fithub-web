@@ -2,8 +2,10 @@
 
 import "@/styles/exercises/exercises.scss";
 import { useEffect, useState } from "react";
+import { MoreHorizontal } from "lucide-react";
 import { getExercises, type Exercise } from "@/lib/exercises-client";
 import NewExerciseModal from "@/components/exercises/NewExerciseModal";
+import EditExerciseModal from "@/components/exercises/EditExerciseModal";
 
 const MUSCLE_GROUPS = ["All", "Chest", "Back", "Legs", "Shoulders", "Arms", "Core"];
 
@@ -15,6 +17,7 @@ export default function ExercisesPage() {
   const [search, setSearch] = useState("");
   const [activeFilter, setActiveFilter] = useState("All");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editingExercise, setEditingExercise] = useState<Exercise | null>(null);
 
   useEffect(() => {
     async function loadExercises() {
@@ -35,6 +38,10 @@ export default function ExercisesPage() {
     setExercises((prev) => [...prev, exercise]);
   }
 
+  function handleExerciseUpdated(exercise: Exercise) {
+    setExercises((prev) => prev.map((item) => (item.id === exercise.id ? exercise : item)));
+  }
+
   const filteredExercises = exercises.filter((exercise) => {
     const matchesFilter =
       activeFilter === "All" || exercise.muscleGroup.toLowerCase() === activeFilter.toLowerCase();
@@ -47,9 +54,9 @@ export default function ExercisesPage() {
   return (
     <div className="exercises-page">
       <div className="exercises-page__header">
-        <div>
-          <h1>Exercise bank</h1>
-          <p>{exercises.length} exercises · your personal library</p>
+        <div className="exercises-page__header__text">
+          <div className="exercises-page__header__text__title">Exercise bank</div>
+          <div className="exercises-page__header__text__subtext">{exercises.length} exercises · your personal library</div>
         </div>
 
         <div className="exercises-page__header-actions">
@@ -101,6 +108,18 @@ export default function ExercisesPage() {
         <div className="exercises-page__grid">
           {filteredExercises.map((exercise) => (
             <div key={exercise.id} className="exercise-card">
+              <button
+                className="exercise-card__menu-button"
+                onClick={() => setEditingExercise(exercise)}
+                aria-label={`Edit ${exercise.name}`}
+              >
+                <MoreHorizontal size={18} />
+              </button>
+
+              <div className="exercise-card__icon">
+                placeholder
+              </div>
+
               <div className="exercise-card__body">
                 <h3>{exercise.name}</h3>
                 <div className="exercise-card__meta">
@@ -119,6 +138,14 @@ export default function ExercisesPage() {
 
       {isModalOpen && (
         <NewExerciseModal onClose={() => setIsModalOpen(false)} onCreated={handleExerciseCreated} />
+      )}
+
+      {editingExercise && (
+        <EditExerciseModal
+          exercise={editingExercise}
+          onClose={() => setEditingExercise(null)}
+          onUpdated={handleExerciseUpdated}
+        />
       )}
     </div>
   );
