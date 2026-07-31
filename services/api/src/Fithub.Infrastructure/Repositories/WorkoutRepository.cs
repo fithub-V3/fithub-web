@@ -8,14 +8,18 @@ public class WorkoutRepository(FithubDbContext dbContext) : IWorkoutRepository
     public Task<List<Workout>> GetAllByUserAsync(Guid userId, CancellationToken cancellationToken = default)
     {
         return dbContext.Workouts
-            .Where(e => e.UserId == userId)
+            .Where(w => w.UserId == userId)
+            .Include(w => w.WorkoutExercises)
+                .ThenInclude(we => we.Exercise)
             .ToListAsync(cancellationToken);
     }
 
     public Task<Workout?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
     {
         return dbContext.Workouts
-            .FirstOrDefaultAsync(e => e.Id == id, cancellationToken);
+            .Include(w => w.WorkoutExercises)
+                .ThenInclude(we => we.Exercise)
+            .FirstOrDefaultAsync(w => w.Id == id, cancellationToken);
     }
 
     public async Task AddAsync(Workout workout, CancellationToken cancellationToken = default)
