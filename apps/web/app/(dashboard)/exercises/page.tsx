@@ -42,6 +42,10 @@ export default function ExercisesPage() {
     setExercises((prev) => prev.map((item) => (item.id === exercise.id ? exercise : item)));
   }
 
+  function handleExerciseDeleted(exerciseId: string) {
+    setExercises((prev) => prev.filter((item) => item.id !== exerciseId));
+  }
+
   const filteredExercises = exercises.filter((exercise) => {
     const matchesFilter =
       activeFilter === "All" || exercise.muscleGroup.toLowerCase() === activeFilter.toLowerCase();
@@ -145,6 +149,7 @@ export default function ExercisesPage() {
           exercise={editingExercise}
           onClose={() => setEditingExercise(null)}
           onUpdated={handleExerciseUpdated}
+          onDeleted={handleExerciseDeleted}
         />
       )}
     </div>

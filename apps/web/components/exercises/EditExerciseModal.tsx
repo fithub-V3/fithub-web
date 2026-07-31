@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { updateExercise, type Exercise } from "@/lib/exercises-client";
+import { deleteExercise, updateExercise, type Exercise } from "@/lib/exercises-client";
 
 const MUSCLE_GROUP_OPTIONS = ["Chest", "Shoulders", "Back", "Legs", "Arms", "Core"];
 const EQUIPMENT_OPTIONS = ["Barbell", "Dumbbell", "Machine", "Bodyweight", "Cable", "Kettlebell"];
@@ -10,13 +10,16 @@ type EditExerciseModalProps = {
   exercise: Exercise;
   onClose: () => void;
   onUpdated: (exercise: Exercise) => void;
+  onDeleted: (exerciseId: string) => void;
 };
 
-export default function EditExerciseModal({ exercise, onClose, onUpdated }: EditExerciseModalProps) {
+export default function EditExerciseModal({ exercise, onClose, onUpdated, onDeleted }: EditExerciseModalProps) {
   const [name, setName] = useState(exercise.name);
   const [muscleGroup, setMuscleGroup] = useState(exercise.muscleGroup);
   const [equipment, setEquipment] = useState(exercise.equipment);
   const [isSaving, setIsSaving] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [isConfirmingDelete, setIsConfirmingDelete] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   async function handleSave() {
@@ -36,6 +39,20 @@ export default function EditExerciseModal({ exercise, onClose, onUpdated }: Edit
       setError(err instanceof Error ? err.message : "Failed to save exercise.");
     } finally {
       setIsSaving(false);
+    }
+  }
+
+  async function handleDelete() {
+    setIsDeleting(true);
+    setError(null);
+
+    try {
+      await deleteExercise(exercise.id);
+      onDeleted(exercise.id);
+      onClose();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Failed to delete exercise.");
+      setIsDeleting(false);
     }
   }
 
@@ -96,12 +113,43 @@ export default function EditExerciseModal({ exercise, onClose, onUpdated }: Edit
         </div>
 
         <div className="exercise-modal__footer">
-          <button onClick={handleSave} disabled={isSaving} className="exercise-modal__save">
-            {isSaving ? "Saving..." : "Save changes"}
-          </button>
-          <button onClick={onClose} className="exercise-modal__cancel">
-            Cancel
-          </button>
+          {isConfirmingDelete ? (
+            <div className="exercise-modal__delete-confirm">
+              <span>Delete this exercise?</span>
+              <button
+                onClick={handleDelete}
+                disabled={isDeleting}
+                className="exercise-modal__delete-confirm-yes"
+              >
+                {isDeleting ? "Deleting..." : "Yes, delete"}
+              </button>
+              <button
+                onClick={() => setIsConfirmingDelete(false)}
+                disabled={isDeleting}
+                className="exercise-modal__cancel"
+              >
+                Keep it
+              </button>
+            </div>
+          ) : (
+            <>
+              <button
+                onClick={() => setIsConfirmingDelete(true)}
+                disabled={isSaving}
+                className="exercise-modal__delete"
+              >
+                Delete exercise
+              </button>
+              <div className="exercise-modal__footer-actions">
+                <button onClick={handleSave} disabled={isSaving} className="exercise-modal__save">
+                  {isSaving ? "Saving..." : "Save changes"}
+                </button>
+                <button onClick={onClose} className="exercise-modal__cancel">
+                  Cancel
+                </button>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>

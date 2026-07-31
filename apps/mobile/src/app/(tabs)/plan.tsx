@@ -1,9 +1,9 @@
 import { View, Text, StyleSheet } from "react-native";
 
-export default function TodayScreen() {
+export default function PlanScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Today screen — coming soon</Text>
+      <Text style={styles.text}>Plan screen — coming soon</Text>
     </View>
   );
 }
