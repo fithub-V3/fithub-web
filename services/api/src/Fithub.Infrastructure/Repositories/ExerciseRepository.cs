@@ -26,4 +26,10 @@ public class ExerciseRepository(FithubDbContext dbContext) : IExerciseRepository
     
     public Task SaveChangesAsync(CancellationToken cancellationToken = default) =>
         dbContext.SaveChangesAsync(cancellationToken);
+
+    public Task<List<Exercise>> GetAllByUserIdsOnlyAsync(Guid userId, CancellationToken cancellationToken = default) =>
+        dbContext.Exercises
+            .AsNoTracking()
+            .Where(e => e.CreatedById == userId)
+            .ToListAsync(cancellationToken);
 }
