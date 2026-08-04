@@ -57,17 +57,19 @@ public class WorkoutService(
 
         foreach (var e in request.Exercises)
         {
-            workout.WorkoutExercises.Add(new WorkoutExercise
+            var workoutExercise = new WorkoutExercise
             {
                 Id = Guid.NewGuid(),
+                WorkoutId = workout.Id,
                 ExerciseId = e.ExerciseId,
                 OrderIndex = e.OrderIndex,
                 TargetSets = e.TargetSets,
                 TargetReps = e.TargetReps,
-            });
+            };
+
+            workoutRepository.AddWorkoutExercise(workoutExercise);
         }
 
-        workoutRepository.Update(workout);
         await workoutRepository.SaveChangesAsync(cancellationToken);
 
         return await GetByIdAsync(id, userId, cancellationToken);

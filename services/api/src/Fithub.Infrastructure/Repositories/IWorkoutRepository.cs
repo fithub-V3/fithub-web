@@ -10,4 +10,5 @@ public interface IWorkoutRepository
     void Update(Workout workout);
     void Delete(Workout workout);
     Task SaveChangesAsync(CancellationToken cancellationToken = default);
+    void AddWorkoutExercise(WorkoutExercise workoutExercise);
 }

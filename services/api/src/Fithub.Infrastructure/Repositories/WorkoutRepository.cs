@@ -39,4 +39,7 @@ public class WorkoutRepository(FithubDbContext dbContext) : IWorkoutRepository
 
     public Task SaveChangesAsync(CancellationToken cancellationToken = default) =>
         dbContext.SaveChangesAsync(cancellationToken);
+
+    public void AddWorkoutExercise(WorkoutExercise workoutExercise) => 
+        dbContext.WorkoutExercises.Add(workoutExercise);
 }

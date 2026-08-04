@@ -10,4 +10,5 @@ public interface IExerciseRepository
     void Update(Exercise exercise);
     void Delete(Exercise exercise);
     Task SaveChangesAsync(CancellationToken cancellationToken = default);
+    Task<List<Exercise>> GetAllByUserIdsOnlyAsync(Guid userId, CancellationToken cancellationToken = default);
 }
