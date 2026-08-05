@@ -56,7 +56,7 @@ export default function ExercisesScreen() {
         </View>
         <Pressable
           style={styles.addButton}
-          onPress={() => router.push("/train/exercises/new" as any)}
+          onPress={() => router.push("/new-exercise" as any)}
         >
           <Plus size={24} color="#07140d" strokeWidth={2.5} />
         </Pressable>
@@ -117,7 +117,7 @@ export default function ExercisesScreen() {
           renderItem={({ item }) => (
             <Pressable
               style={styles.card}
-              onPress={() => router.push(`/train/exercises/${item.id}/edit` as any)}
+              onPress={() => router.push(`/edit-exercise/${item.id}` as any)}
             >
               <View style={styles.cardIcon}>
                 <Dumbbell size={20} color="#98a39e" />
