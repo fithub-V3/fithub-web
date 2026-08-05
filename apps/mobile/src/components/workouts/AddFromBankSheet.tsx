@@ -1,4 +1,4 @@
-import { useMemo, useState, forwardRef } from "react";
+import { useCallback, useMemo, useState, forwardRef } from "react";
 import {
   View,
   Text,
@@ -6,7 +6,12 @@ import {
   Pressable,
   StyleSheet,
 } from "react-native";
-import BottomSheet, { BottomSheetView, BottomSheetFlatList } from "@gorhom/bottom-sheet";
+import { FlatList } from "react-native-gesture-handler";
+import BottomSheet, {
+  BottomSheetFlatList,
+  BottomSheetFooter,
+  type BottomSheetFooterProps,
+} from "@gorhom/bottom-sheet";
 import { Search, Check, Plus } from "lucide-react-native";
 import type { Exercise } from "@/lib/exercises-client";
 
@@ -51,90 +56,16 @@ export const AddFromBankSheet = forwardRef<BottomSheet, AddFromBankSheetProps>(
       );
     }
 
-    function handleConfirm() {
+    const handleConfirm = useCallback(() => {
       const chosen = exercises.filter((e) => pickedIds.includes(e.id));
       onConfirm(chosen);
       setPickedIds([]);
       setSearch("");
-    }
+    }, [exercises, pickedIds, onConfirm]);
 
-    return (
-      <BottomSheet
-        ref={ref}
-        index={-1}
-        snapPoints={["75%"]}
-        enablePanDownToClose
-      >
-        <BottomSheetView style={styles.container}>
-          <Text style={styles.title}>Add from bank</Text>
-
-          <View style={styles.searchWrapper}>
-            <Search size={16} color="#6a746f" />
-            <TextInput
-              style={styles.searchInput}
-              placeholder="Search exercises..."
-              placeholderTextColor="#6a746f"
-              value={search}
-              onChangeText={setSearch}
-            />
-          </View>
-
-          <BottomSheetFlatList
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            data={MUSCLE_GROUPS}
-            keyExtractor={(item) => item}
-            style={styles.filterList}
-            renderItem={({ item }) => (
-              <Pressable
-                onPress={() => setActiveFilter(item)}
-                style={[
-                  styles.pill,
-                  activeFilter === item && styles.pillActive,
-                ]}
-              >
-                <Text
-                  style={[
-                    styles.pillText,
-                    activeFilter === item && styles.pillTextActive,
-                  ]}
-                >
-                  {item}
-                </Text>
-              </Pressable>
-            )}
-          />
-
-          <BottomSheetFlatList
-            data={filtered}
-            keyExtractor={(item) => item.id}
-            contentContainerStyle={styles.list}
-            style={styles.filteredList}
-            renderItem={({ item }) => {
-              const isPicked = pickedIds.includes(item.id);
-              return (
-                <Pressable
-                  style={styles.row}
-                  onPress={() => togglePick(item.id)}
-                >
-                  <View style={styles.rowBody}>
-                    <Text style={styles.rowTitle}>{item.name}</Text>
-                    <Text style={styles.rowSubtitle}>
-                      {item.muscleGroup} · {item.equipment}
-                    </Text>
-                  </View>
-                  {isPicked ? (
-                    <View style={styles.checkCircle}>
-                      <Check size={14} color="#07140d" />
-                    </View>
-                  ) : (
-                    <Plus size={20} color="#34d17e" />
-                  )}
-                </Pressable>
-              );
-            }}
-          />
-
+    const renderFooter = useCallback(
+      (footerProps: BottomSheetFooterProps) => (
+        <BottomSheetFooter {...footerProps} style={styles.footer}>
           <Pressable
             style={[
               styles.confirmButton,
@@ -149,14 +80,102 @@ export const AddFromBankSheet = forwardRef<BottomSheet, AddFromBankSheetProps>(
                 : `Add ${pickedIds.length} exercise${pickedIds.length > 1 ? "s" : ""}`}
             </Text>
           </Pressable>
-        </BottomSheetView>
+        </BottomSheetFooter>
+      ),
+      [pickedIds, handleConfirm],
+    );
+
+    const header = (
+      <View style={styles.header}>
+        <Text style={styles.title}>Add from bank</Text>
+
+        <View style={styles.searchWrapper}>
+          <Search size={16} color="#6a746f" />
+          <TextInput
+            style={styles.searchInput}
+            placeholder="Search exercises..."
+            placeholderTextColor="#6a746f"
+            value={search}
+            onChangeText={setSearch}
+          />
+        </View>
+
+        <FlatList
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          data={MUSCLE_GROUPS}
+          keyExtractor={(item) => item}
+          style={styles.filterList}
+          renderItem={({ item }) => (
+            <Pressable
+              onPress={() => setActiveFilter(item)}
+              style={[
+                styles.pill,
+                activeFilter === item && styles.pillActive,
+              ]}
+            >
+              <Text
+                style={[
+                  styles.pillText,
+                  activeFilter === item && styles.pillTextActive,
+                ]}
+              >
+                {item}
+              </Text>
+            </Pressable>
+          )}
+        />
+      </View>
+    );
+
+    return (
+      <BottomSheet
+        ref={ref}
+        index={-1}
+        snapPoints={["75%"]}
+        enablePanDownToClose
+        footerComponent={renderFooter}
+      >
+        <BottomSheetFlatList
+          data={filtered}
+          keyExtractor={(item) => item.id}
+          style={styles.container}
+          contentContainerStyle={styles.listContent}
+          ListHeaderComponent={header}
+          stickyHeaderIndices={[0]}
+          renderItem={({ item }) => {
+            const isPicked = pickedIds.includes(item.id);
+            return (
+              <Pressable
+                style={styles.row}
+                onPress={() => togglePick(item.id)}
+              >
+                <View style={styles.rowBody}>
+                  <Text style={styles.rowTitle}>{item.name}</Text>
+                  <Text style={styles.rowSubtitle}>
+                    {item.muscleGroup} · {item.equipment}
+                  </Text>
+                </View>
+                {isPicked ? (
+                  <View style={styles.checkCircle}>
+                    <Check size={14} color="#07140d" />
+                  </View>
+                ) : (
+                  <Plus size={20} color="#34d17e" />
+                )}
+              </Pressable>
+            );
+          }}
+        />
       </BottomSheet>
     );
   },
 );
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 20, backgroundColor: "#0a0d0c" },
+  container: { flex: 1 },
+  listContent: { padding: 20, paddingBottom: 110 },
+  header: { backgroundColor: "#0a0d0c", paddingBottom: 12 },
   title: { color: "#fff", fontSize: 18, fontWeight: "700", marginBottom: 16 },
   searchWrapper: {
     flexDirection: "row",
@@ -170,7 +189,6 @@ const styles = StyleSheet.create({
   },
   searchInput: { flex: 1, paddingVertical: 12, color: "#fff", fontSize: 15 },
   filterList: { marginTop: 12, flexGrow: 0 },
-  filteredList: { flex: 1 },
   pill: {
     backgroundColor: "#131917",
     borderRadius: 20,
@@ -181,7 +199,6 @@ const styles = StyleSheet.create({
   pillActive: { backgroundColor: "#fff" },
   pillText: { color: "#98a39e", fontSize: 13 },
   pillTextActive: { color: "#07140d", fontWeight: "600" },
-  list: { paddingTop: 12, paddingBottom: 12 },
   row: {
     flexDirection: "row",
     alignItems: "center",
@@ -201,12 +218,17 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  footer: {
+    paddingHorizontal: 20,
+    paddingTop: 8,
+    paddingBottom: 20,
+    backgroundColor: "#0a0d0c",
+  },
   confirmButton: {
     backgroundColor: "#34d17e",
     borderRadius: 30,
     paddingVertical: 16,
     alignItems: "center",
-    marginTop: 8,
   },
   confirmButtonDisabled: { opacity: 0.4 },
   confirmButtonText: { color: "#07140d", fontWeight: "700", fontSize: 16 },
