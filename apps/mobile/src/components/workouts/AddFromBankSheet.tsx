@@ -12,6 +12,7 @@ import BottomSheet, {
   BottomSheetFooter,
   type BottomSheetFooterProps,
 } from "@gorhom/bottom-sheet";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Search, Check, Plus } from "lucide-react-native";
 import type { Exercise } from "@/lib/exercises-client";
 
@@ -33,6 +34,7 @@ type AddFromBankSheetProps = {
 
 export const AddFromBankSheet = forwardRef<BottomSheet, AddFromBankSheetProps>(
   ({ exercises, alreadyAddedIds, onConfirm }, ref) => {
+    const insets = useSafeAreaInsets();
     const [search, setSearch] = useState("");
     const [activeFilter, setActiveFilter] = useState("All");
     const [pickedIds, setPickedIds] = useState<string[]>([]);
@@ -134,7 +136,11 @@ export const AddFromBankSheet = forwardRef<BottomSheet, AddFromBankSheetProps>(
         index={-1}
         snapPoints={["75%"]}
         enablePanDownToClose
+        topInset={insets.top}
         footerComponent={renderFooter}
+        style={styles.wrapper}
+        handleStyle={styles.handle}
+        handleIndicatorStyle={styles.handleIndicator}
       >
         <BottomSheetFlatList
           data={filtered}
@@ -173,7 +179,10 @@ export const AddFromBankSheet = forwardRef<BottomSheet, AddFromBankSheetProps>(
 );
 
 const styles = StyleSheet.create({
-  container: { flex: 1 },
+  wrapper: { color: "#0a0d0c" },
+  handle: { backgroundColor: "#0a0d0c", borderTopLeftRadius: 15.2, borderTopRightRadius: 15.2 },
+  handleIndicator: { backgroundColor: "#6a746f" },
+  container: { flex: 1, backgroundColor: "#0a0d0c" },
   listContent: { padding: 20, paddingBottom: 110 },
   header: { backgroundColor: "#0a0d0c", paddingBottom: 12 },
   title: { color: "#fff", fontSize: 18, fontWeight: "700", marginBottom: 16 },
