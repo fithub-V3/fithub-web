@@ -16,7 +16,7 @@ public class ScheduleConfiguration : IEntityTypeConfiguration<Schedule>
         builder.Property(s => s.WorkoutId).HasColumnName("workout_id");
         builder.Property(s => s.DayOfWeek).HasColumnName("day_of_week");
 
-        builder.HasOne(s => s.User)
+        builder.HasOne<User>()
             .WithMany(u => u.Schedules)
             .HasForeignKey(s => s.UserId)
             .OnDelete(DeleteBehavior.Cascade);
