@@ -319,7 +319,7 @@ namespace Fithub.Infrastructure.Persistence.Migrations
 
             modelBuilder.Entity("Fithub.Infrastructure.Entities.Schedule", b =>
                 {
-                    b.HasOne("Fithub.Infrastructure.Entities.User", "User")
+                    b.HasOne("Fithub.Infrastructure.Entities.User", null)
                         .WithMany("Schedules")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -330,8 +330,6 @@ namespace Fithub.Infrastructure.Persistence.Migrations
                         .HasForeignKey("WorkoutId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("User");
 
                     b.Navigation("Workout");
                 });
