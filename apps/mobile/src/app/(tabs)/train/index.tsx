@@ -15,7 +15,7 @@ const TRAIN_SECTIONS = [
     label: "Workouts",
     description: "Build and manage your routines",
     icon: ClipboardList,
-    route: "/workouts" as const,
+    route: "/train/workouts" as const,
   },
 ] as const;
 
