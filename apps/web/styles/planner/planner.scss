@@ -1,0 +1,33 @@
+.planner {
+    &__header {
+        display: flex;
+        justify-content: space-between;
+
+        &__left {
+            display: flex;
+            gap: 20px;
+        }
+
+        &__right {
+            display: flex;
+            gap: 20px;
+        }
+    }
+
+
+    &__calendar {
+        &__days {
+            &__day {
+                max-width: fit-content;
+                background: #131917;
+
+
+                &__date {
+                    display: flex;
+                    justify-content: space-between;
+                    gap: 50px;
+                }
+            }
+        }
+    }
+}
