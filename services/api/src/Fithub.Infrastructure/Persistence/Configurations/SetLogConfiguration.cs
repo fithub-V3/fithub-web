@@ -13,7 +13,7 @@ public class SetLogConfiguration : IEntityTypeConfiguration<SetLog>
         builder.HasKey(sl => sl.Id);
         builder.Property(sl => sl.Id).HasColumnName("id");
         builder.Property(sl => sl.WorkoutLogId).HasColumnName("workout_log_id");
-        builder.Property(sl => sl.ExerciseId).HasColumnName("exercise_id");
+        builder.Property(sl => sl.WorkoutExerciseId).HasColumnName("workout_exercise_id");
         builder.Property(sl => sl.SetNumber).HasColumnName("set_number");
         builder.Property(sl => sl.Reps).HasColumnName("reps");
 
@@ -28,9 +28,13 @@ public class SetLogConfiguration : IEntityTypeConfiguration<SetLog>
             .HasForeignKey(sl => sl.WorkoutLogId)
             .OnDelete(DeleteBehavior.Cascade);
 
-        builder.HasOne(sl => sl.Exercise)
-            .WithMany(e => e.SetLogs)
-            .HasForeignKey(sl => sl.ExerciseId)
-            .OnDelete(DeleteBehavior.Restrict);
+        // A SetLog maps to the specific planned WorkoutExercise slot, not just the exercise
+        // in general. WorkoutExercise rows are only ever deleted via their parent Workout's
+        // full-replace-on-update (Clear() + re-Add()), so this cascade also fires whenever a
+        // workout's exercises are edited, deleting logs tied to the replaced slots.
+        builder.HasOne(sl => sl.WorkoutExercise)
+            .WithMany(we => we.SetLogs)
+            .HasForeignKey(sl => sl.WorkoutExerciseId)
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }

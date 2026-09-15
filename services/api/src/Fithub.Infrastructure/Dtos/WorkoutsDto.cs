@@ -8,6 +8,7 @@ public record WorkoutExerciseDto
     public int OrderIndex { get; init; }
     public int TargetSets { get; init; }
     public int TargetReps { get; init; }
+    public decimal? TargetWeightKg { get; init; }
 }
 
 public record WorkoutDto
@@ -23,6 +24,7 @@ public record CreateWorkoutExerciseRequest
     public int OrderIndex { get; init; }
     public int TargetSets { get; init; }
     public int TargetReps { get; init; }
+    public decimal? TargetWeightKg { get; init; }
 }
 
 public record CreateWorkoutRequest
@@ -37,6 +39,7 @@ public record UpdateWorkoutExerciseRequest
     public int OrderIndex { get; init; }
     public int TargetSets { get; init; }
     public int TargetReps { get; init; }
+    public decimal? TargetWeightKg { get; init; }
 }
 
 public record UpdateWorkoutRequest

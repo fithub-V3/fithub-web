@@ -10,6 +10,11 @@ public class WorkoutLog
     public Guid? WorkoutId { get; set; }
     public Workout? Workout { get; set; }
 
+    // Null = not tied to a specific scheduled entry (started from bank
+    // directly, or ad-hoc).
+    public Guid? ScheduleId { get; set; }
+    public Schedule? Schedule { get; set; }
+
     public DateTime StartedAt { get; set; }
     public DateTime? CompletedAt { get; set; }
 

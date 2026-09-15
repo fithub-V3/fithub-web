@@ -14,6 +14,7 @@ public class WorkoutLogConfiguration : IEntityTypeConfiguration<WorkoutLog>
         builder.Property(wl => wl.Id).HasColumnName("id");
         builder.Property(wl => wl.UserId).HasColumnName("user_id");
         builder.Property(wl => wl.WorkoutId).HasColumnName("workout_id");
+        builder.Property(wl => wl.ScheduleId).HasColumnName("schedule_id");
         builder.Property(wl => wl.StartedAt).HasColumnName("started_at");
         builder.Property(wl => wl.CompletedAt).HasColumnName("completed_at");
 
@@ -26,6 +27,13 @@ public class WorkoutLogConfiguration : IEntityTypeConfiguration<WorkoutLog>
         builder.HasOne(wl => wl.Workout)
             .WithMany(w => w.WorkoutLogs)
             .HasForeignKey(wl => wl.WorkoutId)
+            .OnDelete(DeleteBehavior.SetNull);
+
+        // Nullable schedule_id = started from bank directly, or ad-hoc; keep the log
+        // if the schedule entry is later deleted.
+        builder.HasOne(wl => wl.Schedule)
+            .WithMany()
+            .HasForeignKey(wl => wl.ScheduleId)
             .OnDelete(DeleteBehavior.SetNull);
     }
 }

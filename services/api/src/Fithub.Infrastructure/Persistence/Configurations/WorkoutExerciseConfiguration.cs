@@ -17,6 +17,8 @@ public class WorkoutExerciseConfiguration : IEntityTypeConfiguration<WorkoutExer
         builder.Property(we => we.OrderIndex).HasColumnName("order_index");
         builder.Property(we => we.TargetSets).HasColumnName("target_sets");
         builder.Property(we => we.TargetReps).HasColumnName("target_reps");
+        // target_weight_kg: same precision/scale convention as SetLog.WeightKg, e.g. up to 9999.99.
+        builder.Property(we => we.TargetWeightKg).HasColumnName("target_weight_kg").HasPrecision(6, 2);
 
         builder.HasOne(we => we.Workout)
             .WithMany(w => w.WorkoutExercises)

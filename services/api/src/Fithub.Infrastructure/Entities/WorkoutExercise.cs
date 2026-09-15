@@ -10,4 +10,9 @@ public class WorkoutExercise
     public int OrderIndex { get; set; }
     public int TargetSets { get; set; }
     public int TargetReps { get; set; }
+
+    // Null = no target weight set for this slot yet.
+    public decimal? TargetWeightKg { get; set; }
+
+    public ICollection<SetLog> SetLogs { get; set; } = new List<SetLog>();
 }

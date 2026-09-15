@@ -36,6 +36,7 @@ public class WorkoutService(
                 OrderIndex = e.OrderIndex,
                 TargetSets = e.TargetSets,
                 TargetReps = e.TargetReps,
+                TargetWeightKg = e.TargetWeightKg,
             }).ToList(),
         };
 
@@ -65,6 +66,7 @@ public class WorkoutService(
                 OrderIndex = e.OrderIndex,
                 TargetSets = e.TargetSets,
                 TargetReps = e.TargetReps,
+                TargetWeightKg = e.TargetWeightKg,
             };
 
             workoutRepository.AddWorkoutExercise(workoutExercise);
@@ -128,6 +130,7 @@ public class WorkoutService(
         OrderIndex = workoutExercise.OrderIndex,
         TargetSets = workoutExercise.TargetSets,
         TargetReps = workoutExercise.TargetReps,
+        TargetWeightKg = workoutExercise.TargetWeightKg,
     };
 
 }

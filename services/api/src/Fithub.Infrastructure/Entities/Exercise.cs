@@ -12,5 +12,4 @@ public class Exercise
     public User? CreatedBy { get; set; }
 
     public ICollection<WorkoutExercise> WorkoutExercises { get; set; } = new List<WorkoutExercise>();
-    public ICollection<SetLog> SetLogs { get; set; } = new List<SetLog>();
 }
