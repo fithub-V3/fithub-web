@@ -4,6 +4,7 @@ using Fithub.Infrastructure.Repositories;
 using Fithub.Infrastructure.Services.Auth;
 using Fithub.Infrastructure.Services.Exercises;
 using Fithub.Infrastructure.Services.Schedules;
+using Fithub.Infrastructure.Services.WorkoutLogs;
 using Fithub.Infrastructure.Services.Workouts;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.RateLimiting;
@@ -29,6 +30,8 @@ builder.Services.AddScoped<IWorkoutRepository, WorkoutRepository>();
 builder.Services.AddScoped<IWorkoutService, WorkoutService>();
 builder.Services.AddScoped<IScheduleRepository, ScheduleRepository>();
 builder.Services.AddScoped<IScheduleService, ScheduleService>();
+builder.Services.AddScoped<IWorkoutLogRepository, WorkoutLogRepository>();
+builder.Services.AddScoped<IWorkoutLogService, WorkoutLogsService>();
 
 builder.Services
     .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
