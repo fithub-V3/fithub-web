@@ -7,7 +7,7 @@ public record WorkoutLogDto
     public string? WorkoutName { get; init; }
     public Guid? ScheduleId { get; init; }
     public required DateTime StartedAt { get; init; }
-    public required DateTime CompletedAt { get; init; }
+    public required DateTime? CompletedAt { get; init; }
     public required List<SetLogDto> SetLogs { get; init; }
 }
 

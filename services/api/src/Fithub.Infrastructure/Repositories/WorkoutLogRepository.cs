@@ -18,9 +18,10 @@ public class WorkoutLogRepository(FithubDbContext dbContext) : IWorkoutLogReposi
             .ToListAsync(cancellationToken);
     }
 
-    public async Task<WorkoutLog?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
+    public async Task<WorkoutLog?> GetByIdAsync(Guid id, Guid userId, CancellationToken cancellationToken = default)
     {
         return await dbContext.WorkoutLogs
+            .Where(l => l.UserId == userId)
             .Include(l => l.Workout)
             .Include(l => l.SetLogs)
                 .ThenInclude(s => s.WorkoutExercise)
