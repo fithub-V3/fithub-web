@@ -78,6 +78,19 @@
         }
     }
 
+    &__start-button {
+        background: #34d17e;
+        color: #07140d;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+        justify-self: center;
+        height: 68.5px;
+        border-radius: 10px;
+    }
+
     &__dot {
         display: inline-block;
         width: 8px;

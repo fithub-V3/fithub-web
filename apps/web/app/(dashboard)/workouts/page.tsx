@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 import { MoreHorizontal } from "lucide-react";
 import { getWorkouts, type Workout, type WorkoutExercise } from "@/lib/workouts-client";
 import { getExercises, type Exercise } from "@/lib/exercises-client";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlay } from "@fortawesome/free-solid-svg-icons";
 
 
 export default function WorkoutsPage() {
@@ -86,6 +88,7 @@ export default function WorkoutsPage() {
                                 <td>{workout.exercises.length}</td>
                                 <td className="workouts-table__muted">-</td>
                                 <td className="workouts-table__muted">-</td>
+                                <td className="workouts-table__start-button"><FontAwesomeIcon icon={faPlay} style={{color: "rgb(255, 255, 255)",}} /> Start</td>
                                 <td>
                                     <button
                                         className="workouts-table__menu"
